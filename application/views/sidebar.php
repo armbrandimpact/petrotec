@@ -22,22 +22,14 @@
           <button type="button" class="an-btn an-btn-icon dropdown-toggle"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="an-profile-img" style="background-image: url('<?= base_url(); ?>admin_assets/assets//img/users/user5.jpeg');"></span>
-            <span class="an-user-name">
-            <?php
-              if(isset($this->data)){
-                echo $this->data['username'];
-              }else{
-                echo 'Admin';
-              }
-            ?>
-            </span>
+            <span class="an-user-name">Admin</span>
             <span class="an-arrow-nav"><i class="icon-arrow-down"></i></span>
           </button>
           <div class="dropdown-menu">
             <p class="an-info-count">Profile Settings</p>
             <ul class="an-profile-list">
               <li><a href="#"><i class="icon-user"></i>Settings</a></li>
-              <li><a href="<?php if(isset($this->data)) { echo base_url('Login/logout'); } else{ echo '#';}?>"><i class="icon-download-left"></i>Log out</a></li>
+              <li><a href="#"><i class="icon-download-left"></i>Log out</a></li>
             </ul>
           </div>
         </div>
@@ -79,14 +71,14 @@
               <span class="nav-title">Dashboard</span>
             </a>
 		  </li>
-		  <li class="an-nav-item ">
+		  <li class="an-nav-item <?= ($this->uri->segment(1) == 'Sales') ? 'nav-open' : ''; ?>">
 			<a class=" js-show-child-nav" href="#">
               <i class="icon-chart-stock"></i>
               <span class="nav-title">Sales
 			  <span class="an-arrow-nav"><i class="icon-arrow-down"></i></span>
 			  </span>
             </a>
-			 <ul class="an-child-nav js-open-nav">
+			 <ul class="an-child-nav js-open-nav" <?= ($this->uri->segment(1) == 'Sales') ? 'style="display: block;"' : ''; ?>>
               <li><a href="<?= base_url('Sales/index'); ?>">All Sales</a></li>
               <li><a href="#">All Invoice</a></li>
               <li><a href="<?= base_url('Sales/generateinvoice'); ?>">Generate Invoice</a></li>

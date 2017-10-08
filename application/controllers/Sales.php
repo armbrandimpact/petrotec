@@ -2,7 +2,7 @@
 class Sales extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Sales_model');
+		$this->load->model('sales_model');
 	}
 	public function index() 
 	{

@@ -21,10 +21,13 @@
 		});
 		$('.datepicker_from').datepicker({
 			format: 'yyyy-mm-dd',
-			setDate: 'new Date()',
-		}).on('changeDate', function(e) {
-            $('#eventForm').formValidation('revalidateField', 'request_from');
-        });
+			startDate: 'today',
+		});
+		$('.datepicker_to').datepicker({
+			format: 'yyyy-mm-dd',
+			startDate: 'tomorrow',
+		});
+
 		$('.datepicker_installment').datepicker({
 			format: 'yyyy-mm-dd',
 			setDate: new Date(),

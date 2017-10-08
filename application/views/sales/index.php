@@ -40,7 +40,7 @@
                         <td><?= $customer->fname; ?></td>			
                         <td><?= date('d/m/Y',strtotime($ap->date_created)); ?></td>			
                         <td> <?=(!empty($amount))? $amount->paid:'00';?></td>			
-                        <td> <?= $this->Sales_model->sales_total($ap->id);?></td>			
+                        <td> <?= $this->sales_model->sales_total($ap->id);?></td>			
                         <td> 
                         <?php
                             if(!empty($amount)){

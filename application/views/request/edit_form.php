@@ -21,6 +21,7 @@ hr {
 </style>
 <?php 
 	$row = $this->db->get_where('request', array('id' => $this->uri->segment(3)))->row();
+	$employee = $this->db->get_where('employee')->result();
 ?>
 <?= form_open_multipart(base_url('request/update'),'id="eventForm"'); ?>
 <div style="padding:10px 120px; width:100%">
@@ -47,7 +48,12 @@ hr {
                     <label for="date">Doc No: </label>
                     <span>HR-DOC-00<?= $row->id;?></span><br/>
                     <label for="date">End User: </label>
-                    <span><?= $row->end_user;?></span><br/>
+                    <select class="form-control col-md-1" name="end_user" required>
+						<?php if(!empty($employee)):
+							foreach($employee as $c): ?>
+								<option value="<?= $c->id; ?>" <?php if($c->id == $row->end_user){echo 'selected';} ?>><?= $c->firstname;?></option>
+						<?php endforeach; endif; ?>
+					</select>
                     
                 </div>
             </div>

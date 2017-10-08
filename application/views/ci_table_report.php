@@ -99,7 +99,8 @@
                         </tr>
                         <tr>
                             <td>End User:</td>
-                            <td>End User</td>
+                            <td> <?= $this->employee_model->get_name(($row->end_user)?$row->end_user:'');?></td>
+
                         </tr>
                     </table>
                 </td>
