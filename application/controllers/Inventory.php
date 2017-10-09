@@ -71,4 +71,11 @@
 			
 		}
 	}
+	public function addinventory()
+	{
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('inventory/addInventory');
+		$this->load->view('footer');
+	}
 }

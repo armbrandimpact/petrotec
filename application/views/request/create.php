@@ -19,13 +19,14 @@ hr {
     left: 5%;
 }
 </style>
+<?php $employee = $this->db->get_where('employee')->result()?>
 <?= form_open_multipart(base_url('request/store'),array('id' => 'eventForm')); ?>
 <div style="padding:10px 120px; width:100%">
-	<h4>Add Applicant</h4>
+	<h4>Add Request</h4>
     <br />
     <div class="row">
         <div class="col-md-4 col-lg-4">
-            <img src="<?= base_url(); ?>admin_assets/assets/img/logo.jpg"  class="img-responsive"/>
+            <img src="<?= base_url(); ?>admin_assets/assets/img/logo.png"  class="img-responsive"/>
         </div>
         <div class="col-md-4 col-lg-4">
             <h4>Request for leave form</h4>
@@ -36,12 +37,14 @@ hr {
                 <div class="col-md-12">
                     <label for="date">Date: </label>
                     <span><?=Date('d.m.Y');?></span><br/>
-                    <label for="date">Department: </label>
-                    <span><?=$this->data['department'];?></span><br/>
-                    <label for="date">Doc No: </label>
-                    <span>HR-DOC-00<?= $this->data['userid'];?></span><br/>
+                    
                     <label for="date">End User: </label>
-                    <span>Question Mark</span><br/>
+                    <select class="form-control" name="end_user" required>
+						<?php if(!empty($employee)):
+							foreach($employee as $c): ?>
+								<option value="<?= $c->id; ?>"><?= $c->firstname; ?></option>
+						<?php endforeach; endif; ?>
+					</select>
                     
                 </div>
             </div>

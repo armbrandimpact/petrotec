@@ -21,10 +21,13 @@
 		});
 		$('.datepicker_from').datepicker({
 			format: 'yyyy-mm-dd',
-			setDate: 'new Date()',
-		}).on('changeDate', function(e) {
-            $('#eventForm').formValidation('revalidateField', 'request_from');
-        });
+			startDate: 'today',
+		});
+		$('.datepicker_to').datepicker({
+			format: 'yyyy-mm-dd',
+			startDate: 'tomorrow',
+		});
+
 		$('.datepicker_installment').datepicker({
 			format: 'yyyy-mm-dd',
 			setDate: new Date(),
@@ -203,10 +206,20 @@
 		});
 	});
 
-	
+	// Generate invoice change date
+	$(document).ready(function(){ 		
+		$('#change_date').click(function () {
+			if($('#invoice_date').attr('disabled'))
+			{
+				$('#invoice_date').removeAttr('disabled');
+				$('#change_date').css({ background: "#468847" });
+				$("input[id='hidden_invoice_date']").remove();
+			}
+			
+			
+		});
+	});
 
-	
-	//
 	// end
 </script>
 

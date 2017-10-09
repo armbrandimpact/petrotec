@@ -2,18 +2,18 @@
 class Request extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-        (empty($this->session->userdata('userdata')))?redirect('Login/form'):$this->data =$this->session->userdata('userdata');
+        $this->load->model('employee_model');
 	}
 	function index(){            
         $this->load->view('header');
-        $this->load->view('sidebar',$this->data);
-        $this->load->view('request/index',$this->data);
+        $this->load->view('sidebar');
+        $this->load->view('request/index');
         $this->load->view('footer');
 	}
     function create(){
         $this->load->view('header');
-        $this->load->view('sidebar',$this->data);
-        $this->load->view('request/create',$this->data);
+        $this->load->view('sidebar');
+        $this->load->view('request/create');
         $this->load->view('footer');
     }
     function store(){
@@ -27,11 +27,13 @@ class Request extends CI_Controller{
         $request_doctor_no = ($this->input->post('request_doctor_no') =='on') ? 1:0;
         $request_department_head_clearance_only = ($this->input->post('request_department_head_clearance_only') =='on') ? 1:0;
         $request_full_clearance_required = ($this->input->post('request_full_clearance_required') =='on') ? 1:0;
+		$end_user = $this->input->post('end_user');
+		$user_row = $this->db->get_where('employee')->row();
 		$ins = array(
 			'today' => $this->input->post('today'),
-			'department' => $this->data['userid'],
-			'doc_number' => 'HR-DOC-00'.$this->data['userid'],
-			'end_user' => 'end_user',
+			'department' => $user_row->department,
+			'doc_number' => 'HR-DOC-00'.$end_user,
+			'end_user' => $user_row->id,
 			'request_name' => $this->input->post('request_name'),
 			'request_department' => $this->input->post('request_department'),
 			'request_section' => $this->input->post('request_section'),
@@ -69,7 +71,7 @@ class Request extends CI_Controller{
     public function edit($id)
     {
         $this->load->view('header');
-		$this->load->view('sidebar',$this->data);
+		$this->load->view('sidebar');
 		$this->load->view('request/edit_form');
 		$this->load->view('footer');
     }

@@ -19,6 +19,7 @@ hr {
     left: 5%;
 }
 </style>
+<?= form_open_multipart(base_url('Sales/generateinvoice_post')); ?>
 <div style="padding:10px 180px; width:100%">
 	<h4>Create Vendor</h4>
 	<br />
@@ -32,13 +33,25 @@ hr {
 		<div class="col-md-6">
 			<div class="form-group">
 				<label>Invoice Number</label>
-				<input type="text" class="form-control" />
+				<input name="invoice_number" type="text" class="form-control" placeholder="starts with 000" />
 			</div>
-			<div class="form-group">
-				<label>Date</label>
-				<input type="text" class="form-control" value="<?= date('Y-m-d'); ?>" />
+			<div class="form-group" id="invoice_info">
+				<label>Date <span id="change_date" class="badge badge-secondary pull-right" style="margin-left: 35px; cursor: pointer;">change date</span></label>
+				<input name="date" type="text" class="form-control datepicker" id="invoice_date" value="<?= date('Y-m-d'); ?>" disabled />
+				<input type="hidden" value="<?= date('Y-m-d'); ?>" name="hidden_invoice_date" id="hidden_invoice_date">
 			</div>
 		</div>
 	</div>
 	<hr />
+	
+	<div class="row">
+		<div class="col-md-6">
+			<a href="<?= base_url('Sales/index'); ?>" class="btn btn-primary btn-block">Cancel</a>
+		</div>
+		<div class="col-md-6">
+			<input type="submit" value="Create" class="btn btn-primary btn-block" />
+		</div>
+	</div>
+
 </div>
+<?= form_close(); ?>
