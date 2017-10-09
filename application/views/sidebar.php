@@ -50,21 +50,6 @@
 
       <div class="an-sidebar-nav">
         <ul class="an-main-nav">
-          <!-- <li class="an-nav-item ">
-            <a class=" js-show-child-nav" href="#">
-              <i class="icon-chart-stock"></i>
-              <span class="nav-title">Dashboard
-                    <span class="an-arrow-nav"><i class="icon-arrow-down"></i></span>
-                  </span>
-            </a>
-
-            <ul class="an-child-nav js-open-nav">
-              <li><a href="index.html">Version 1</a></li>
-              <li><a href="index_2.html">Version 2</a></li>
-              <li><a href="index_3.html">Version 3</a></li>
-            </ul>
-          </li> -->
-		  
 		  <li class="an-nav-item ">
 			<a href="#">
               <i class="icon-chart-stock"></i>
@@ -79,8 +64,8 @@
 			  </span>
             </a>
 			 <ul class="an-child-nav js-open-nav" <?= ($this->uri->segment(1) == 'Sales') ? 'style="display: block;"' : ''; ?>>
-              <li><a href="<?= base_url('Sales/index'); ?>">All Sales</a></li>
-              <li><a href="<?= base_url('Sales/history'); ?>">Sales history</a></li>
+              <li><a href="<?= base_url('Sales/index'); ?>" <?= ($this->uri->segment(2) == 'index') ? 'class="active_menu"' : ''; ?>>All Sales</a></li>
+              <li><a href="<?= base_url('Sales/history'); ?>" <?= ($this->uri->segment(2) == 'history') ? 'class="active_menu"' : ''; ?>>Sales history</a></li>
             </ul>
 		  </li>
 			<?php
@@ -148,10 +133,10 @@
 			  </span>
             </a>
 			
-			<ul class="an-child-nav js-open-nav">
-              <li><a href="<?= base_url('inventory/viewInventory'); ?>">All inventory</a></li>
-              <li><a href="<?= base_url('inventory/allproduct'); ?>">Product</a></li>
-              <li><a href="<?= base_url('inventory/category'); ?>">Category</a></li>
+			<ul class="an-child-nav js-open-nav" <?= ($this->uri->segment(1) == 'inventory') ? 'style="display: block;"' : ''; ?>>
+              <li><a href="<?= base_url('inventory/viewInventory'); ?>" <?= ($this->uri->segment(2) == 'viewInventory') ? 'class="active_menu"' : ''; ?>>All inventory</a></li>
+              <li><a href="<?= base_url('inventory/allproduct'); ?>" <?= ($this->uri->segment(2) == 'allproduct') ? 'class="active_menu"' : ''; ?>>Product</a></li>
+              <li><a href="<?= base_url('inventory/category'); ?>" <?= ($this->uri->segment(2) == 'category') ? 'class="active_menu"' : ''; ?>>Category</a></li>
             </ul>
 		  </li>
 			<li class="an-nav-item ">

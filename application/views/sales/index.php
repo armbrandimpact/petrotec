@@ -50,14 +50,12 @@
                             }
                         ?></td>			
                         <td>
-                        <?php
-                        if(!empty($amount) && ($amount->status != 'finish')){?>
-                            <a href="<?= base_url('Sales/installment/'.$ap->id); ?>" class="btn btn-danger">Installment</a>
-                        <?php } ?>
-                    
-
                         <a href="<?= base_url('Sales/pdf/'.$ap->id); ?>" target="_blank" class="btn btn-info">PDF</a>
                         <a href="<?= base_url('Sales/show/'.$ap->id); ?>" class="btn btn-primary">View</a>
+                        <?php
+                        if(!empty($amount) && ($amount->status != 'finish')){?>
+                            <a href="<?= base_url('Sales/installment/'.$ap->id); ?>" class="btn btn-danger" style="font-size:12px">installment</a>
+                        <?php } ?>
                         </td>
 
                     </tr>
