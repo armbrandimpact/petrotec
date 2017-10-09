@@ -53,7 +53,13 @@ class Sales extends CI_Controller{
 		$amount = $this->input->post('amount');
 		$next_installment = $this->input->post('next_installment');
 		$next_amount = $this->input->post('next_amount');
-		($this->Sales_model->sales_total($id) <= $amount) ? $status='finish': $status='pending';
+		($this->sales_model->sales_total($id) <= $amount) ? $status='finish': $status='pending';
+		$insert_sales_history = array(
+			'sales_id' => $id,
+			'date' => new date('Y-m-d'),
+			'amount' => $amount,
+		);
+		$this->db->insert('sales_history', $insert_sales_history);
 		$insert_installment = array(
 			'salesid'=>$id,
 			'paid'=>$amount,
@@ -94,9 +100,16 @@ class Sales extends CI_Controller{
 		$amount = ($this->input->post('amount') >1)?$this->input->post('amount'):redirect('Sales/index');
 		$date = $this->input->post('installment_date');
 		$row = $this->db->get_where('installment',array('salesid' =>$salesid))->row();
+		// Writing to sales_history table
+		$insert_sales_history = array(
+			'sales_id' => $salesid,
+			'date' => date('Y-m-d'),
+			'amount' => $amount,
+		);
+		$this->db->insert('sales_history', $insert_sales_history);
 		$paid = $row->paid;
 		$paid += $amount;
-		if($paid >= $this->Sales_model->sales_total($salesid)){
+		if($paid >= $this->sales_model->sales_total($salesid)){
 			$update = array(
 				'next_installment' => $date,
 				'paid' => $paid,
@@ -148,6 +161,14 @@ class Sales extends CI_Controller{
 							<strong>0!</strong>
 						</div>';
 		}
+	}
+
+	public function history()
+	{
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('sales/history');
+		$this->load->view('footer');
 	}
 
 	public function addItem()

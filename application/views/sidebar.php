@@ -82,7 +82,7 @@
               <li><a href="<?= base_url('Sales/index'); ?>">All Sales</a></li>
               <li><a href="#">All Invoice</a></li>
               <li><a href="<?= base_url('Sales/generateinvoice'); ?>">Generate Invoice</a></li>
-              <li><a href="#">Sales history</a></li>
+              <li><a href="<?= base_url('Sales/history'); ?>">Sales history</a></li>
             </ul>
 		  </li>
 			<?php
