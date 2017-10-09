@@ -42,7 +42,7 @@ hr {
 				</tr>
 			</thead>
 			<tbody>
-				<?php if(!empty($supplier)): foreach($supplier as $s): ?>
+				<?php if(!empty($customer)): foreach($customer as $s): ?>
 					<tr>
 						<td><?= $s->fname.' '.$s->lname; ?></td>
 						<td><?= $s->email; ?></td>

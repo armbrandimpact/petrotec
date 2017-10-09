@@ -2,13 +2,6 @@
 	function __construct(){
 		parent::__construct();
 	}
-	function viewInventory()
-	{
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('inventory/viewInventory');
-		$this->load->view('footer');
-	}
 	function allproduct(){
 		$this->load->view('header');
 		$this->load->view('sidebar');
@@ -64,18 +57,103 @@
 		$this->load->view('inventory/addproduct');
 		$this->load->view('footer');
 	}
+	function editproduct($id){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('inventory/editproduct');
+		$this->load->view('footer');
+	}
 	function insProduct(){
 		$name = $this->input->post('name');
+		$companyid = $this->input->post('companyid');
 		$check = $this->db->get_where('product', array('name' => $name))->row();
-		if(!empty($check)){
-			
+		$catid = $this->db->get_where('category', array('id' => $this->input->post('ccatid')))->row();
+		$ins = array(
+			'name' => $name,
+			'description' => $this->input->post('description'),
+			'code' => $this->input->post('code'),
+			'note' => $this->input->post('notes'),
+			'supplier_id' => $this->input->post('supplier_id'),
+			'pcatid' => $catid->parent,
+			'ccatid' => $this->input->post('ccatid'),
+			'created_date' => date('Y-m-d'),
+		);
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = '*';
+		$this->load->library('upload', $config);
+		if(empty($this->input->post('id'))){
+			if(!empty($check)){
+				$this->session->set_flashdata('alert_msg', array('failure', 'product', 'product already intered.'));
+			}
+			else{
+				$this->db->insert('product', $ins);
+				$id = $this->db->insert_id();
+				if ( $this->upload->do_upload('doc'))
+				{
+					$data = array('upload_data' => $this->upload->data());
+					$this->db->insert('attachment', array(
+						'refid' => $id,
+						'type' => 'product',
+						'url' => $data['upload_data']['file_name']
+					));
+				}
+				$this->session->set_flashdata('alert_msg', array('success', 'product', 'product inserted.'));
+			}
+			redirect('inventory/addproduct');
+		}else{
+			$id = $this->input->post('id');
+			$this->db->update('product', $ins, array('id' => $id));
+			if ( $this->upload->do_upload('doc'))
+			{
+				$data = array('upload_data' => $this->upload->data());
+				$this->db->insert('attachment', array(
+					'refid' => $id,
+					'type' => 'product',
+					'url' => $data['upload_data']['file_name']
+				));
+			}
+			$this->session->set_flashdata('alert_msg', array('success', 'product', 'product updated.'));
+			redirect('inventory/editproduct/'.$id);
 		}
 	}
-	public function addinventory()
-	{
+	function deleteproductimg($id, $pageid){
+		$this->db->delete('attachment', array('id' => $id));
+		$this->session->set_flashdata('alert_msg', array('success', 'product', 'product image deleted.'));
+		redirect('inventory/editproduct/'.$pageid);
+	}
+	function deleteproduct($id){
+		$this->db->delete('attachment', array('id' => $id));
+		$this->db->delete('product', array('id' => $id));
+		$this->session->set_flashdata('alert_msg', array('success', 'product', 'product deleted.'));
+		redirect('inventory/allproduct/');
+	}
+	function viewInventory(){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('inventory/viewInventory');
+		$this->load->view('footer');
+	}
+	function addInventory($id){
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('inventory/addInventory');
 		$this->load->view('footer');
+	}
+	function insinventory(){
+		$pid = $this->input->post('pid');
+		foreach($this->input->post('qty') as $key => $value){
+			$qty = (empty($value) || $value <= 0) ? 0 : $value;
+			$query_updateqty = array('companyid' => $key, 'productid' => $pid);
+			$count = $this->db->get_where('inventory', $query_updateqty)->row();
+			if(!empty($count)){
+				$update = $count->qty + $qty;
+				$this->db->update('inventory', array('qty' => $update), $query_updateqty);
+			}else{
+				$this->db->insert('inventory', array('companyid' => $key, 'productid' => 
+				$pid, 'qty' => $value));
+			}
+		}
+		$this->session->set_flashdata('alert_msg', array('success', 'product', 'Inventory updated'));
+		redirect('inventory/addInventory/'.$pid);
 	}
 }

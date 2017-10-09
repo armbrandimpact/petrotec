@@ -92,7 +92,7 @@ echo form_open_multipart(base_url('inventory/insProduct')); ?>
 				<label>File</label>
 				<input type="file" name="doc" />
 				<?php else: ?>
-				<a href="<?= base_url('uploads/'.$attachment->url); ?>" class="btn btn-link">Download</a> <a href="<?= base_url('inventory/deleteproductimg'.$attachment->id.'/'.$product->id); ?>">x</a>
+				<a href="<?= base_url('uploads/'.$attachment->url); ?>" class="btn btn-link">Download</a> <a href="<?= base_url('inventory/deleteproductimg/'.$attachment->id.'/'.$product->id); ?>">x</a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -105,6 +105,7 @@ echo form_open_multipart(base_url('inventory/insProduct')); ?>
 			<a href="<?= base_url('supplier'); ?>" class="btn btn-primary btn-block">Cancel</a>
 		</div>
 		<div class="col-md-6">
+			<input type="hidden" value="<?= $product->id; ?>" name="id" />
 			<input type="submit" value="Save" class="btn btn-primary btn-block" />
 		</div>
 	</div>

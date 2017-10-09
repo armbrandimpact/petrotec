@@ -97,7 +97,7 @@
             </a>
 			<ul class="an-child-nav js-open-nav" <?= $style; ?>>
               <li><a <?= $child1; ?> href="<?= base_url('customer/addcustomer'); ?>">Add Customer</a></li>
-              <li><a <?= $child; ?> href="<?= base_url('home/allcustomer'); ?>">All Customers</a></li>
+              <li><a <?= $child; ?> href="<?= base_url('customer/allcustomer'); ?>">All Customers</a></li>
             </ul>
 		  </li>
 			<?php

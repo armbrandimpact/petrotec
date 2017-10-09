@@ -158,5 +158,15 @@ class Hr extends CI_Controller{
 		$this->load->view('hr/view_shortlist');
 		$this->load->view('footer');
 	}
+	function finalizepayroll($id){
+		$this->db->update('employee', array('status' => 'hiring'), array('id' => $id));
+		redirect('hr/shortlistview');
+	}
+	function payroll(){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('hr/view_payroll');
+		$this->load->view('footer');
+	}
 }
 ?>

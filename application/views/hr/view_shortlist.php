@@ -57,8 +57,11 @@ $applicants = $this->db->get_where('employee', array('status' => 'shortlist'))->
 						<a href="<?= base_url('uploads/'.$cv->url); ?>" target="blank">Download CV</a>
 					<?php endif; ?>
 					</td>
-					<td><a href="<?= base_url('hr/deletefromshortlist/'.$ap->id); ?>" class="btn btn-danger">Delete From Shortlist</a>
-					<a href="<?= base_url('hr/editemployee/'.$ap->id); ?>" class="btn btn-primary">Edit</a>
+					<td>
+						<a href="<?= base_url('hr/deletefromshortlist/'.$ap->id); ?>" class="btn btn-danger">Delete From Shortlist</a>
+						<a href="<?= base_url('hr/editemployee/'.$ap->id); ?>" class="btn btn-primary">Edit</a>
+						<a href="<?= base_url('hr/finalizepayroll/'.$ap->id); ?>" class="btn btn-success">On Payroll</a>
+					</td>
 				</tr>
 			<?php endforeach; endif; ?>
 			</tbody>
