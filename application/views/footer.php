@@ -206,10 +206,20 @@
 		});
 	});
 
-	
+	// Generate invoice change date
+	$(document).ready(function(){ 		
+		$('#change_date').click(function () {
+			if($('#invoice_date').attr('disabled'))
+			{
+				$('#invoice_date').removeAttr('disabled');
+				$('#change_date').css({ background: "#468847" });
+				$("input[id='hidden_invoice_date']").remove();
+			}
+			
+			
+		});
+	});
 
-	
-	//
 	// end
 </script>
 

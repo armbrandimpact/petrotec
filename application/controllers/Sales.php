@@ -97,7 +97,7 @@ class Sales extends CI_Controller{
 	public function updateInstallment()
 	{
 		$salesid = $this->input->post('salesid');
-		$amount = ($this->input->post('amount') >1)?$this->input->post('amount'):redirect('Sales/index');
+		$amount = ($this->input->post('amount') >=1)?$this->input->post('amount'):redirect('Sales/index');
 		$date = $this->input->post('installment_date');
 		$row = $this->db->get_where('installment',array('salesid' =>$salesid))->row();
 		// Writing to sales_history table
@@ -341,6 +341,18 @@ class Sales extends CI_Controller{
 		$this->load->view('sidebar');
 		$this->load->view('sales/generateinvoice');
 		$this->load->view('footer');
+	}
+
+	public function generateinvoice_post()
+	{
+		$date = ($this->input->post('hidden_invoice_date'))?$this->input->post('hidden_invoice_date'):$this->input->post('date');
+		$invoice_number = $this->input->post('invoice_number');
+		$sales_id = substr($invoice_number, strpos($invoice_number,"000")+1);
+		$row = $this->db->get_where('sales',array('id'=>$sales_id))->row();
+		echo "employee id : ".$row->employee_id;
+
+
+
 	}
 }
 ?>

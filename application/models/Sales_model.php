@@ -24,5 +24,17 @@
             return $total;
 
         }
+        public function get_employee_name($id)
+        {
+            $sales_id = $this->db->get_where('sales',array('id'=>$id))->row();
+            $row = $this->db->get_where('employee',array('id'=>$sales_id->employee_id))->row();
+            return $row->firstname;
+        }
+        public function get_customer_name($id)
+        {
+            $sales_id = $this->db->get_where('sales',array('id'=>$id))->row();
+            $row = $this->db->get_where('customer',array('id'=>$sales_id->customerid))->row();
+            return $row->fname;
+        }
 	}
 ?>
