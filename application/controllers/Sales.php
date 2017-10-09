@@ -87,6 +87,20 @@ class Sales extends CI_Controller{
 		$filename = 'sales_report_'.$row->date.time();
 		$this->pdfgenerator->generate($html, $filename, true, 'A4', 'portrait');
 	}
+	public function pdf_history() 
+	{
+		$id = $this->uri->segment(3);
+		$sales_history = $this->db->get_where('sales_history', array('id' => $id))->row();
+		
+		$this->load->library('pdfgenerator');
+		$data['row']=$sales_history;
+		
+		$html = $this->load->view('sales/history_pdf', $data, true);
+		
+		$filename = 'sales_history_'.$sales_history->date."_".time();
+		
+		$this->pdfgenerator->generate($html, $filename, true, 'A4', 'portrait');
+	}
 	public function installment()
 	{
 		$this->load->view('header');

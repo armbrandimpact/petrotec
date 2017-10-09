@@ -17,6 +17,7 @@
                         <th>Paid</th>
                         <th>Total</th>
                         <th>Date Created</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +32,10 @@
                         <td><?= $ap->amount; ?></td>
                         <td><?= $paid->paid; ?></td>
                         <td><?= $this->sales_model->sales_total($ap->sales_id); ?></td>		
-                        <td><?= date('d/m/Y',strtotime($ap->date)); ?></td>	
+                        <td><?= date('d/m/Y',strtotime($ap->date)); ?></td>
+                        <td>
+                        <a href="<?= base_url('Sales/pdf_history/'.$ap->id); ?>" target="_blank" class="btn btn-info">PDF</a>
+                        </td>
                     </tr>
                 <?php } } ?>
                 </tbody>
