@@ -56,7 +56,7 @@ class Sales extends CI_Controller{
 		($this->sales_model->sales_total($id) <= $amount) ? $status='finish': $status='pending';
 		$insert_sales_history = array(
 			'sales_id' => $id,
-			'date' => new date('Y-m-d'),
+			'date' => date('Y-m-d'),
 			'amount' => $amount,
 		);
 		$this->db->insert('sales_history', $insert_sales_history);
