@@ -28,7 +28,11 @@
         {
             $sales_id = $this->db->get_where('sales',array('id'=>$id))->row();
             $row = $this->db->get_where('employee',array('id'=>$sales_id->employee_id))->row();
-            return $row->firstname;
+			if(empty($row)){
+				return '-';
+			}else{
+				return $row->firstname;
+			}
         }
         public function get_customer_name($id)
         {

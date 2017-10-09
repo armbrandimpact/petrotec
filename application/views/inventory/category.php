@@ -112,7 +112,12 @@ $category = $this->db->get_where('category', array('parent' => 0))->result();
 				</div>
 				<div class="form-group">
 					<select name="catid" class="form-control">
-						<?php $this->main_model->getcategory(); ?>
+						<option value="0">None</option>
+						<?php $cat = $this->db->get('category')->result(); 
+							if(!empty($cat)): foreach($cat as $c):
+						?>
+							<option value="<?= $c->id; ?>"><?= $c->categoryname; ?></option>
+						<?php endforeach; endif; ?>
 					</select>
 				</div>
 			</div>
