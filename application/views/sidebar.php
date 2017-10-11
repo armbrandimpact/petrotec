@@ -223,6 +223,7 @@
 			
 			<ul class="an-child-nav js-open-nav <?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>">
               <li><a href="#">General</a></li>
+              <li><a href="<?= base_url('Company/index'); ?>">Companies</a></li>
               <li><a href="#">Security</a></li>
               <li><a href="#">Notification</a></li>
               <li><a href="#">Assign Access</a></li>

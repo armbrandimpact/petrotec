@@ -161,11 +161,7 @@ class Sales extends CI_Controller{
 				echo $row->qty;
 			}
 		}else{
-			echo '
-						<label style="font-size: 9px;">Quantity in Inventory</label>
-						<div class="alert alert-danger" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
-							<strong>0!</strong>
-						</div>';
+			echo '0';
 		}
 	}
 
