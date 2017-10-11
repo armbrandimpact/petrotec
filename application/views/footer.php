@@ -73,6 +73,9 @@
     $('#register').validator();
 	// Change Company
 	$(document).ready(function(){ 
+		var product_count1 = $('#product_count1').val();
+		$('#quantity_show').append(product_count1);
+
 		
 		$("#companyId").change(function(){ 
 			var companyId = $(this).val(); 
@@ -132,7 +135,7 @@
 		var a,b;
 		var sum = 0;
 		var count = $("input[id*='price']").length;
-		console.log(count+" tut");
+		
 		if(count == 1){
 			quantity = $("#quantityId1").val();
 			price = $("#price1").val();
@@ -152,6 +155,8 @@
 			
 			$("#total").html(sum);
 		}
+
+		
 
     });
 	// Add Item
@@ -198,6 +203,12 @@
 					$('.newProduct').append(data);
 					var productId_1 = parseInt($('#productId_1').val());
 					var total = parseInt(productId_1 + count_products);
+
+					var count = $("input[id*='price']").length;
+					var product_count = $('select#productId_1 option').length;
+					if(count >= product_count){
+						$('#hideAddButton').addClass('hide');
+					}
 					
 
 		
@@ -206,21 +217,6 @@
 		});
 	});
 
-	// Generate invoice change date
-	$(document).ready(function(){ 		
-		$('#change_date').click(function () {
-			if($('#invoice_date').attr('disabled'))
-			{
-				$('#invoice_date').removeAttr('disabled');
-				$('#change_date').css({ background: "#468847" });
-				$("input[id='hidden_invoice_date']").remove();
-			}
-			
-			
-		});
-	});
-
-	// end
 </script>
 
 </body>

@@ -156,17 +156,9 @@ class Sales extends CI_Controller{
 		if(!empty($row))
 		{
 			if($quantity <= $row->qty){
-				echo '
-						<label style="font-size: 9px;">Quantity in Inventory</label>
-						<div class="alert alert-success" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
-							<strong>'.$row->qty.'!</strong>
-						</div>';
+				echo $row->qty;
 			}else{
-				echo '
-						<label style="font-size: 9px;">Quantity in Inventory</label>
-						<div class="alert alert-danger" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
-							<strong>'.$row->qty.'!</strong>
-						</div>';
+				echo $row->qty;
 			}
 		}else{
 			echo '
@@ -256,6 +248,12 @@ class Sales extends CI_Controller{
 		$("#deleteButton_'.$data.'").click(function () {
 			$("#deleteItem_'.$data.'").remove();
 
+			var count = $("input[id*='.$priceText.']").length;
+			var product_count = $("select#productId_1 option").length;
+			
+			if(count <= product_count){
+				$("#hideAddButton").removeClass("hide");
+			}
 		var i=1;
 		var qty;
 		var pp;
@@ -312,7 +310,6 @@ class Sales extends CI_Controller{
 				mysum+=(a*b);
 				totalsum+=mysum; 
 				mysum=0; 
-				console.log(totalsum);
 			});  
 			
 			$("#total").html(totalsum);
@@ -339,14 +336,12 @@ class Sales extends CI_Controller{
 				mysum+=(a*b);
 				totalsum+=mysum; 
 				mysum=0; 
-				console.log(totalsum);
 			});  
 			
 			$("#total").html(totalsum);
 		});
 		
 	});
-	
 	</script>
 ';     
 	}

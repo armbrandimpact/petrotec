@@ -24,11 +24,16 @@ hr {
 	$company = $this->db->get('company')->result();
 	$supplier = $this->db->get('supplier')->result();
 	$product = $this->db->get('product')->result();
+	$firstProduct = intval($this->db->get('product')->first_row()->id);
+	
+	$product_count1 = $this->db->get_where('inventory',array('productid'=>$firstProduct))->row();
+	
 ?>
 <?= form_open_multipart(base_url('Sales/store')); ?>
 <div style="padding:10px 180px; width:100%" id="myForm">
 
 	<input type="hidden" id="count_product_fromdb" value="<?=count($product);?>">
+	<input type="hidden" id="product_count1" value="<?=$product_count1->qty;?>">
 	<h4>Add</h4>
 	<br />
     <div class="row">
@@ -106,7 +111,11 @@ hr {
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="form-group" id="quantity_show">
+					<div class="form-group">
+						<label style="font-size: 9px;">Quantity in Inventory</label>
+						<div class="alert alert-success" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
+							<strong  id="quantity_show"></strong>
+						</div>
 					</div>
 				</div>
 			</div>
