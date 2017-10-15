@@ -177,7 +177,7 @@
             </ul>
       </li>
       <!-- User 
-      <li class="an-nav-item <?= ($this->uri->segment(1) == 'User') ? 'nav-open' : ''; ?>">
+      <li class="an-nav-item <//?= ($this->uri->segment(1) == 'User') ? 'nav-open' : ''; ?>">
 			<a class=" js-show-child-nav" href="#">
               <i class="icon-chart-stock"></i>
               <span class="nav-title">User
@@ -185,9 +185,8 @@
 			  </span>
             </a>
 			
-			<ul class="an-child-nav js-open-nav" <?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>>
-              <li><a href="<?= base_url('User/index'); ?>" <?= ($this->uri->segment(2) == 'index') ? 'class="active_menu"' : ''; ?>>All Users</a></li>
-              
+			<ul class="an-child-nav js-open-nav" <//?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>>
+              <li><a href="<//?= base_url('User/index'); ?>" <//?= ($this->uri->segment(2) == 'index') ? 'class="active_menu"' : ''; ?>>All Users</a></li>
             </ul>
       </li> -->
       <!-- Accounting -->
@@ -220,13 +219,10 @@
             </a>
 			
 			<ul class="an-child-nav js-open-nav <?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>">
-<<<<<<< HEAD
               <li><a href="<?= base_url('company/allcompany'); ?>">Company</a></li>
-=======
-              <li><a href="#">General</a></li>
+              <li><a href="<?= base_url('units/'); ?>">Units</a></li>
               <li><a href="<?= base_url('Company/index'); ?>">Companies</a></li>
               <li><a href="#">Security</a></li>
->>>>>>> 450646c5025e553825a4bf68b9f910efbc80d8bf
               <li><a href="#">Notification</a></li>
               <li><a href="#">Assign Access</a></li>
             </ul>
