@@ -197,11 +197,7 @@ class Sales extends CI_Controller{
 				echo $row->qty;
 			}
 		}else{
-			echo '
-						<label style="font-size: 9px;">Quantity in Inventory</label>
-						<div class="alert alert-danger" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
-							<strong>0!</strong>
-						</div>';
+			echo '0';
 		}
 	}
 
@@ -233,6 +229,12 @@ class Sales extends CI_Controller{
 		$options ='';
 		if(!empty($product)){
 			foreach($product as $row){
+				$product_count = $this->db->get_where('inventory',array('productid'=>$row->id))->row();
+				if(isset($product_count)){
+					$total_qty = $product_count->qty;
+				}else{
+					$total_qty = 0;
+				}
 				$options .= '<option value="'.$row->id.'">'.$row->name.'</option>';
 			}
 		}		
@@ -266,6 +268,14 @@ class Sales extends CI_Controller{
 				        <input type="text" name="price[]" id="price'.$data.'" class="form-control" />
 					</div>
 				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label style="font-size: 9px;">Quantity in Inventory</label>
+						<div class="alert alert-success" style="font-size: 12px; padding: 0 15px; margin-top: 5px;">
+							<strong  id="quantity_show">'.$total_qty.'</strong>
+						</div>
+					</div>
+				</div>
 				<div class="col-md-1">
 					<div class="form-group">
 					<button type="button" id="deleteButton_'.$data.'" class="close" aria-label="Close">
@@ -274,6 +284,7 @@ class Sales extends CI_Controller{
 						
 					</div>
 				</div>
+				
 			</div>
 			
 		</div>
@@ -281,6 +292,7 @@ class Sales extends CI_Controller{
 		</div>
 		<script>
 		$(document).ready(function(){ 
+
 		$("#deleteButton_'.$data.'").click(function () {
 			$("#deleteItem_'.$data.'").remove();
 

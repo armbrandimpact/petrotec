@@ -135,7 +135,6 @@
 		var a,b;
 		var sum = 0;
 		var count = $("input[id*='price']").length;
-		
 		if(count == 1){
 			quantity = $("#quantityId1").val();
 			price = $("#price1").val();
@@ -150,14 +149,9 @@
 				pp = parseInt($("#price"+i).val());
 				b = parseInt(pp);
 				sum += (a*b);
-				
 			}
-			
 			$("#total").html(sum);
 		}
-
-		
-
     });
 	// Add Item
 	$(document).ready(function(){ 

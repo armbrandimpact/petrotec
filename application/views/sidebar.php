@@ -220,7 +220,13 @@
             </a>
 			
 			<ul class="an-child-nav js-open-nav <?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>">
+<<<<<<< HEAD
               <li><a href="<?= base_url('company/allcompany'); ?>">Company</a></li>
+=======
+              <li><a href="#">General</a></li>
+              <li><a href="<?= base_url('Company/index'); ?>">Companies</a></li>
+              <li><a href="#">Security</a></li>
+>>>>>>> 450646c5025e553825a4bf68b9f910efbc80d8bf
               <li><a href="#">Notification</a></li>
               <li><a href="#">Assign Access</a></li>
             </ul>

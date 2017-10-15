@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2017 at 10:19 AM
+-- Generation Time: Oct 11, 2017 at 11:56 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -75,19 +75,22 @@ INSERT INTO `category` (`id`, `categoryname`, `parent`) VALUES
 
 CREATE TABLE `company` (
   `id` int(11) NOT NULL,
-  `company_name` text NOT NULL
+  `company_name` text NOT NULL,
+  `company_phone` varchar(255) NOT NULL,
+  `company_address` varchar(255) NOT NULL,
+  `company_logo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `company`
 --
 
-INSERT INTO `company` (`id`, `company_name`) VALUES
-(1, 'company1'),
-(2, 'company2'),
-(3, 'company3'),
-(4, 'company4'),
-(5, 'company5');
+INSERT INTO `company` (`id`, `company_name`, `company_phone`, `company_address`, `company_logo`) VALUES
+(1, 'company1', '', '', ''),
+(2, 'company2', '', '', ''),
+(3, 'company3', '', '', ''),
+(4, 'company4', '', '', ''),
+(5, 'company5', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -195,7 +198,7 @@ INSERT INTO `installment` (`id`, `salesid`, `paid`, `date`, `next_installment`, 
 (7, 10, 9, '2017-10-17', '0000-00-00', 'finish'),
 (8, 12, 24, '2017-10-11', '0000-00-00', 'pending'),
 (9, 13, 34, '2017-10-12', '0000-00-00', 'finish'),
-(10, 14, 12, '2017-10-07', '2017-10-21', 'pending'),
+(10, 14, 20, '2017-10-07', '2017-10-21', 'pending'),
 (11, 15, 15, '2017-10-14', '2017-10-28', 'pending'),
 (12, 20, 50, '2017-10-10', '2017-10-25', 'pending'),
 (13, 82, 50, '2017-10-15', '2017-10-22', 'pending'),
@@ -357,7 +360,9 @@ CREATE TABLE `sales_history` (
 INSERT INTO `sales_history` (`id`, `sales_id`, `date`, `amount`) VALUES
 (2, 83, '2017-10-09', 5),
 (3, 8, '2017-10-09', 1),
-(4, 8, '2017-10-09', 1);
+(4, 8, '2017-10-09', 1),
+(5, 14, '2017-10-11', 5),
+(6, 14, '2017-10-11', 3);
 
 -- --------------------------------------------------------
 
@@ -584,7 +589,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `customer`
 --
@@ -624,7 +629,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `sales_history`
 --
 ALTER TABLE `sales_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `sales_item`
 --
