@@ -119,10 +119,8 @@
 			  </span>
             </a>
 			<ul class="an-child-nav js-open-nav">
-              <li><a href="#">Purchase Order</a></li>
-              <li><a <?= $child; ?> href="<?= base_url('home/vendorlist'); ?>">Vendor List</a></li>
-              <li><a href="#">Purchase history</a></li>
-              <li><a href="#">Assets</a></li>
+              <li><a href="<?= base_url('sales/index/purchase'); ?>">All P.O</a></li>
+              <li><a href="#">Create P.0</a></li>
             </ul>
 		  </li>
 		  <li class="an-nav-item ">
@@ -222,11 +220,9 @@
             </a>
 			
 			<ul class="an-child-nav js-open-nav <?= ($this->uri->segment(1) == 'User') ? 'style="display: block;"' : ''; ?>">
-              <li><a href="#">General</a></li>
-              <li><a href="#">Security</a></li>
+              <li><a href="<?= base_url('company/allcompany'); ?>">Company</a></li>
               <li><a href="#">Notification</a></li>
               <li><a href="#">Assign Access</a></li>
-              <li><a href="#">Add User</a></li>
             </ul>
 		  </li>
         </ul> <!-- end .AN-MAIN-NAV -->

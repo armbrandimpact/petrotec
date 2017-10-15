@@ -8,14 +8,50 @@ class Sales extends CI_Controller{
 	{
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('sales/index');
+		$this->load->view('sales/sales');
 		$this->load->view('footer');
 	}
-	public function create()
+	public function addsales()
 	{
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('sales/create');
+		$this->load->view('sales/addsales');
+		$this->load->view('footer');
+	}
+	function insSales(){
+		$ins = array(
+			'customerid' => $this->input->post('customer'),
+			'companyid' => $this->input->post('companyid'),
+			'date' => date('Y-m-d'),
+			'type' => $this->input->post('type'),
+			'notes' => $this->input->post('notes'),
+			'total' => $this->input->post('total'),
+		);
+		$this->db->insert('sales_perchasing', $ins);
+		$id = $this->db->insert_id();
+		$product = $this->input->post('product');
+		$qty = $this->input->post('qty');
+		$price = $this->input->post('price');
+		if(!empty($product)): foreach($product as $pk => $p):
+			$this->db->insert('sp_history', array(
+				'sales_id' => $id,
+				'productid' => $p,
+				'qty' => $qty[$pk],
+				'price' => $price[$pk],
+			));
+		endforeach; endif;
+		$this->session->set_flashdata('alert_msg', array('success', 'sales', 'Request Send To the Depart.'));
+		$url = 'Sales/insSales';
+		redirect($url);
+	}
+	function changestatus($id){
+		$this->db->get_where('sales_perchasing', array('status' => 'approved'));
+		redirect('sales/');
+	}
+	function editsales($id){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('sales/editsales');
 		$this->load->view('footer');
 	}
 	public function store()

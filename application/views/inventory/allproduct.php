@@ -39,7 +39,6 @@ hr {
 					<th>Date</th>
 					<th>Product Name</th>
 					<th>Category</th>
-					<th>Code</th>
 					<th>Supplier</th>
 					<th>Action</th>
 				</tr>
@@ -54,7 +53,6 @@ hr {
 							echo $cat->categoryname;
 							?>
 						</td>
-						<td><?= $p->code; ?></td>
 						<td>
 							<?php $sup = $this->db->get_where('supplier', array('id' => $p->supplier_id))->row(); 
 							echo $sup->email;

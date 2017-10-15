@@ -65,22 +65,22 @@
 	}
 	function insProduct(){
 		$name = $this->input->post('name');
-		$companyid = $this->input->post('companyid');
 		$check = $this->db->get_where('product', array('name' => $name))->row();
 		$catid = $this->db->get_where('category', array('id' => $this->input->post('ccatid')))->row();
 		$ins = array(
-			'name' => $name,
 			'description' => $this->input->post('description'),
-			'code' => $this->input->post('code'),
 			'note' => $this->input->post('notes'),
 			'supplier_id' => $this->input->post('supplier_id'),
 			'pcatid' => $catid->parent,
 			'ccatid' => $this->input->post('ccatid'),
 			'created_date' => date('Y-m-d'),
+			'name' => $name,
 		);
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = '*';
 		$this->load->library('upload', $config);
+		$code = $this->input->post('code');
+		$company = $this->input->post('company');
 		if(empty($this->input->post('id'))){
 			if(!empty($check)){
 				$this->session->set_flashdata('alert_msg', array('failure', 'product', 'product already intered.'));
@@ -99,7 +99,7 @@
 				}
 				$this->session->set_flashdata('alert_msg', array('success', 'product', 'product inserted.'));
 			}
-			redirect('inventory/addproduct');
+			$url = 'inventory/addproduct';
 		}else{
 			$id = $this->input->post('id');
 			$this->db->update('product', $ins, array('id' => $id));
@@ -113,8 +113,19 @@
 				));
 			}
 			$this->session->set_flashdata('alert_msg', array('success', 'product', 'product updated.'));
-			redirect('inventory/editproduct/'.$id);
+			$url = 'inventory/editproduct/'.$id;
 		}
+		$this->db->delete('product_alt', array('productid' => $id));
+		if(!empty($code)){
+			foreach($code as $ck => $cv){
+				$this->db->insert('product_alt', array(
+					'productid' => $id,
+					'code' => $cv,
+					'companyid' => $company[$ck],
+				));
+			}
+		}
+		redirect($url);
 	}
 	function deleteproductimg($id, $pageid){
 		$this->db->delete('attachment', array('id' => $id));
